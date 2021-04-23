@@ -28,7 +28,7 @@ namespace SkoleProtokolAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            
             // Requires using Microsoft.Extensions.Options
 
             // Populates the RollCallDatabaseSettings object with data
@@ -52,8 +52,12 @@ namespace SkoleProtokolAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) // Logging:LogLevel:Default
         {
+            Console.WriteLine("ENV:: " + env.EnvironmentName);
+            //Console.WriteLine("ENV:: " + env.GetValue("FrontendURL", defaultValue: "not found"));
+
+            Console.WriteLine("ENV: " + Configuration.GetValue("FrontendURL", defaultValue: "not found"));
 
             if (env.IsDevelopment())
             {
