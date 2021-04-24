@@ -1,6 +1,8 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /app
 
+ENV SkoleProtokolMongoConnection=${MONGO_CONNECTIONSTRING}
+
 # copy csproj and restore as distinct layers
 COPY *.sln .
 COPY SkoleProtokolAPI/*.csproj ./SkoleProtokolAPI/
@@ -20,7 +22,7 @@ WORKDIR /app
 
 # Setting environmental variables
 ENV ASPNETCORE_ENVIRONMENT=”Development”
-ENV SkoleProtokolMongoConnection=$MONGO_CONNECTIONSTRING
+ENV SkoleProtokolMongoConnection=${MONGO_CONNECTIONSTRING}
 
 COPY --from=build /app/SkoleProtokolAPI/out ./
 ENTRYPOINT ["dotnet", "SkoleProtokolAPI.dll"]
