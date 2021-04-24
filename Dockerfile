@@ -20,7 +20,7 @@ WORKDIR /app
 
 # Setting environmental variables
 ENV ASPNETCORE_ENVIRONMENT=”Development”
-ENV SkoleProtokolMongoConnection=${{ secrets.MONGO_CONNECTIONSTRING }}
+ENV SkoleProtokolMongoConnection=$MONGO_CONNECTIONSTRING
 
 COPY --from=build /app/SkoleProtokolAPI/out ./
 ENTRYPOINT ["dotnet", "SkoleProtokolAPI.dll"]
